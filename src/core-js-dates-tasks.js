@@ -78,7 +78,7 @@ function getNextFriday(date) {
   const currentDay = d.getDay();
   let index;
   if (currentDay === 5) {
-    d.setDate(d.getDate() + 7);
+    date.setDate(date.getDate() + 7);
   }
   if (currentDay < 5) {
     index = 5 - currentDay;
@@ -159,8 +159,13 @@ function isDateInPeriod(date, period) {
  * '1999-01-05T02:20:00.000Z' => '1/5/1999, 2:20:00 AM'
  * '2010-12-15T22:59:00.000Z' => '12/15/2010, 10:59:00 PM'
  */
-function formatDate(/* date */) {
-  throw new Error('Not implemented');
+function formatDate(date) {
+  const d = new Date(date);
+  const timeZone = { timeZone: 'UTC' };
+  return `${d.toLocaleDateString('en-US', timeZone)}, ${d.toLocaleTimeString(
+    'en-US',
+    timeZone
+  )}`;
 }
 
 /**
